@@ -2,10 +2,8 @@ package com.tiago.tarefas.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.KeyboardActionHandler
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -14,10 +12,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -28,7 +28,7 @@ import com.tiago.tarefas.R
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
-fun NewTaskRow(
+fun NewTaskTextField(
     state: TextFieldState,
     modifier: Modifier = Modifier,
     createTask: () -> Unit
@@ -41,7 +41,7 @@ fun NewTaskRow(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(10.dp),
+                .padding(5.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -57,11 +57,18 @@ fun NewTaskRow(
                 ),
                 onKeyboardAction = KeyboardActionHandler {
                     createTask()
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    errorBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    disabledBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent
+                )
             )
-            Spacer(Modifier.width(10.dp))
             FloatingActionButton(
-                onClick = createTask
+                onClick = createTask,
+                modifier = Modifier
+                    .padding(start = 5.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_add),
@@ -74,9 +81,9 @@ fun NewTaskRow(
 
 @Preview
 @Composable
-private fun NewTaskRowPreview() {
+private fun NewTaskTextFieldPreview() {
     TarefasTheme {
-        NewTaskRow(
+        NewTaskTextField(
             state = TextFieldState(),
             createTask = {}
         )

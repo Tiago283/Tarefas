@@ -54,7 +54,7 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
 
     fun createTask() {
         viewModelScope.launch {
-            val text = _uiState.value.newTaskText.text.toString()
+            val text = _uiState.value.newTaskTextFieldState.text.toString()
 
             if (text.isNotBlank()) {
                 repository.insertTask(
@@ -62,7 +62,7 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
                 )
             }
 
-            _uiState.value.newTaskText.clearText()
+            _uiState.value.newTaskTextFieldState.clearText()
         }
     }
 

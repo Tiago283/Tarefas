@@ -2,6 +2,7 @@ package com.tiago.tarefas.ui.tasklist
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -25,8 +26,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tiago.tarefas.R
 import com.tiago.tarefas.models.Task
 import com.tiago.tarefas.ui.AppViewModelProvider
-import com.tiago.tarefas.ui.components.NewTaskRow
-import com.tiago.tarefas.ui.components.TaskRow
+import com.tiago.tarefas.ui.components.NewTaskTextField
+import com.tiago.tarefas.ui.components.TaskComponent
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
@@ -73,11 +74,11 @@ fun TaskListContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
+                .consumeWindowInsets(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            NewTaskRow(
-                state = uiState.newTaskText,
+            NewTaskTextField(
+                state = uiState.newTaskTextFieldState,
                 createTask = createTask
             )
             HorizontalDivider()
@@ -98,7 +99,7 @@ fun TaskListContent(
                             .padding(10.dp)
                     ) {
                         items(uiState.taskList) { task ->
-                            TaskRow(
+                            TaskComponent(
                                 task,
                                 onCheckTask,
                                 deleteTask
