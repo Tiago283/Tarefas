@@ -6,5 +6,5 @@ import com.tiago.tarefas.models.TaskModel
 data class TaskListState(
     val taskList: List<TaskModel> = emptyList(),
     val newTaskTextFieldState: TextFieldState = TextFieldState(""),
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
 )
