@@ -25,7 +25,7 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             repository.getAll()
-                .map { list -> list.map { task -> task.toTask()} }
+                .map { list -> list.map { task -> task.toTaskModel()} }
                 .collect { tasks ->
                     _uiState.update {
                         it.copy(taskList = tasks, isLoading = false)
@@ -82,7 +82,7 @@ fun TaskModel.toTaskEntity() : TaskEntity = TaskEntity(
     task = task
 )
 
-fun TaskEntity.toTask() : TaskModel = TaskModel(
+fun TaskEntity.toTaskModel() : TaskModel = TaskModel(
     id = id,
     isChecked = isChecked,
     task = task

@@ -8,7 +8,7 @@ import com.tiago.tarefas.TarefasApplication
 import com.tiago.tarefas.ui.tasklist.TaskListViewmodel
 
 object AppViewModelProvider {
-    var Factory = viewModelFactory {
+    val Factory = viewModelFactory {
         initializer {
             TaskListViewmodel(
                 tarefasApplication().taskRepository
