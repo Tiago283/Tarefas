@@ -27,7 +27,7 @@ import com.tiago.tarefas.R
 import com.tiago.tarefas.models.Task
 import com.tiago.tarefas.ui.AppViewModelProvider
 import com.tiago.tarefas.ui.components.NewTaskTextField
-import com.tiago.tarefas.ui.components.TaskRow
+import com.tiago.tarefas.ui.components.TaskComponent
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
@@ -99,7 +99,7 @@ fun TaskListContent(
                             .padding(10.dp)
                     ) {
                         items(uiState.taskList) { task ->
-                            TaskRow(
+                            TaskComponent(
                                 task,
                                 onCheckTask,
                                 deleteTask
