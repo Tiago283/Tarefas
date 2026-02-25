@@ -46,3 +46,19 @@ fun TaskRow(
         }
     }
 }
+
+@Preview
+@Composable
+private fun TaskComponentPreview() {
+    TarefasTheme {
+        TaskComponent(
+            task = Task(
+                id = 0,
+                isChecked = false,
+                task = ""
+            ),
+            onCheckTask = { _, _  -> },
+            deleteTask = {}
+        )
+    }
+}
