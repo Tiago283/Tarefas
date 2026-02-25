@@ -2,7 +2,6 @@ package com.tiago.tarefas.ui.tasklist
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -39,7 +38,7 @@ fun TaskListScreen(
     TaskListContent(
         uiState = taskListUiState,
         onCheckTask = { taskId, value ->
-            taskListViewmodel.onCheckTask(taskId, value)
+            taskListViewmodel.checkTask(taskId, value)
         },
         deleteTask = { taskId ->
             taskListViewmodel.deleteTask(
@@ -74,20 +73,20 @@ fun TaskListContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .consumeWindowInsets(innerPadding),
+                .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NewTaskTextField(
                 state = uiState.newTaskTextFieldState,
                 createTask = createTask
             )
-            HorizontalDivider()
             when {
                 uiState.isLoading -> {
                     Column(
                         modifier = Modifier
                             .weight(1f),
-                        verticalArrangement = Arrangement.Center
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         CircularProgressIndicator()
                     }

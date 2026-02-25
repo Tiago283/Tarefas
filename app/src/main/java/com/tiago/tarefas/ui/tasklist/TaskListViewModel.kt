@@ -22,10 +22,13 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
     }
 
     private fun loadTasks() {
-        _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             repository.getAll()
-                .map { list -> list.map { task -> task.toTaskModel()} }
+                .map { list ->
+                    list
+                        .map { task -> task.toTaskModel() }
+                        .sortedBy { task -> task.isChecked }
+                }
                 .collect { tasks ->
                     _uiState.update {
                         it.copy(taskList = tasks, isLoading = false)
@@ -34,21 +37,13 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
         }
     }
 
-    fun onCheckTask(taskId: Int, value: Boolean) {
+    fun checkTask(taskId: Int, value: Boolean) {
         viewModelScope.launch {
             val task = _uiState.value.taskList
                 .first { it.id == taskId }
                 .copy(isChecked = value)
 
             repository.updateTask(task.toTaskEntity())
-        }
-        _uiState.update {
-            it.copy(
-                taskList = it.taskList.map { task ->
-                    if (task.id == taskId) task.copy(isChecked = value)
-                    else task
-                }
-            )
         }
     }
 
