@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tiago.tarefas.R
-import com.tiago.tarefas.models.Task
+import com.tiago.tarefas.models.TaskModel
 import com.tiago.tarefas.ui.AppViewModelProvider
 import com.tiago.tarefas.ui.components.NewTaskTextField
 import com.tiago.tarefas.ui.components.TaskComponent
@@ -120,9 +120,9 @@ private fun TaskListPreview() {
         TaskListContent(
             uiState = TaskListState(
                 taskList = listOf(
-                    Task(1, true, "Any"),
-                    Task(2, false, "Any"),
-                    Task(3, false, "Any")
+                    TaskModel(1, true, "Any"),
+                    TaskModel(2, false, "Any"),
+                    TaskModel(3, false, "Any")
                 ),
                 isLoading = false
             ),

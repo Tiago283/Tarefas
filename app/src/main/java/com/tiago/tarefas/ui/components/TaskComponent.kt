@@ -16,12 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tiago.tarefas.R
-import com.tiago.tarefas.models.Task
+import com.tiago.tarefas.models.TaskModel
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
 fun TaskComponent(
-    task: Task,
+    task: TaskModel,
     onCheckTask: (taskId: Int, value: Boolean) -> Unit,
     deleteTask: (taskId: Int) -> Unit,
     modifier: Modifier = Modifier
@@ -62,7 +62,7 @@ fun TaskComponent(
 private fun TaskComponentPreview() {
     TarefasTheme {
         TaskComponent(
-            task = Task(
+            task = TaskModel(
                 id = 0,
                 isChecked = false,
                 task = "Example Task"

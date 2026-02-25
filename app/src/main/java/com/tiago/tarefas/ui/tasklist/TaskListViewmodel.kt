@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tiago.tarefas.data.entity.TaskEntity
 import com.tiago.tarefas.data.local.TaskRepository
-import com.tiago.tarefas.models.Task
+import com.tiago.tarefas.models.TaskModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -76,13 +76,13 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
     }
 }
 
-fun Task.toTaskEntity() : TaskEntity = TaskEntity(
+fun TaskModel.toTaskEntity() : TaskEntity = TaskEntity(
     id = id,
     isChecked = isChecked,
     task = task
 )
 
-fun TaskEntity.toTask() : Task = Task(
+fun TaskEntity.toTask() : TaskModel = TaskModel(
     id = id,
     isChecked = isChecked,
     task = task
