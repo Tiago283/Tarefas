@@ -1,8 +1,9 @@
 package com.tiago.tarefas.ui.components
 
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Checkbox
@@ -10,9 +11,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tiago.tarefas.R
@@ -26,6 +33,8 @@ fun TaskComponent(
     deleteTask: (taskId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var scrollState by remember { mutableStateOf(ScrollState(1)) }
+
     Row(
         modifier = modifier
             .fillMaxWidth(),
@@ -40,10 +49,27 @@ fun TaskComponent(
             modifier = Modifier
                 .padding(5.dp)
         )
-        Text(
-            text = task.task
-        )
-        Spacer(Modifier.weight(1f))
+        if (task.isChecked) {
+            Text(
+                text = task.task,
+                modifier = Modifier
+                    .horizontalScroll(scrollState)
+                    .weight(1f),
+                fontStyle = FontStyle.Italic,
+                textDecoration = TextDecoration.LineThrough,
+                maxLines = 1
+            )
+        } else {
+            Text(
+                text = task.task,
+                modifier = Modifier
+                    .horizontalScroll(scrollState)
+                    .weight(1f),
+                fontStyle = FontStyle.Normal,
+                textDecoration = TextDecoration.None,
+                maxLines = 1
+            )
+        }
         IconButton(
             onClick = { deleteTask(task.id) },
             modifier = Modifier
