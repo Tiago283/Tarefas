@@ -28,7 +28,7 @@ import com.tiago.tarefas.R
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
-fun NewTaskRow(
+fun NewTaskTextField(
     state: TextFieldState,
     modifier: Modifier = Modifier,
     createTask: () -> Unit
@@ -81,9 +81,9 @@ fun NewTaskRow(
 
 @Preview
 @Composable
-private fun NewTaskRowPreview() {
+private fun NewTaskTextFieldPreview() {
     TarefasTheme {
-        NewTaskRow(
+        NewTaskTextField(
             state = TextFieldState(),
             createTask = {}
         )
