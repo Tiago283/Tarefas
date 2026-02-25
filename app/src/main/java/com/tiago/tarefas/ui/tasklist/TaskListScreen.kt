@@ -39,7 +39,7 @@ fun TaskListScreen(
     TaskListContent(
         uiState = taskListUiState,
         onCheckTask = { taskId, value ->
-            taskListViewmodel.onCheckTask(taskId, value)
+            taskListViewmodel.checkTask(taskId, value)
         },
         deleteTask = { taskId ->
             taskListViewmodel.deleteTask(

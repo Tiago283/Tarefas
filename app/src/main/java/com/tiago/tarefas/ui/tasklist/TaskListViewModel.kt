@@ -34,21 +34,20 @@ class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
         }
     }
 
-    fun onCheckTask(taskId: Int, value: Boolean) {
+    fun checkTask(taskId: Int, value: Boolean) {
         viewModelScope.launch {
             val task = _uiState.value.taskList
                 .first { it.id == taskId }
                 .copy(isChecked = value)
 
             repository.updateTask(task.toTaskEntity())
-        }
-        _uiState.update {
-            it.copy(
-                taskList = it.taskList.map { task ->
-                    if (task.id == taskId) task.copy(isChecked = value)
-                    else task
-                }
-            )
+
+            _uiState.update {
+                it.copy(
+                    taskList = it.taskList
+                        .filter { task -> task.isChecked }
+                )
+            }
         }
     }
 
