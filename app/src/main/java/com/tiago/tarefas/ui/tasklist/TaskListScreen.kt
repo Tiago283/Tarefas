@@ -20,18 +20,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tiago.tarefas.R
 import com.tiago.tarefas.models.TaskModel
-import com.tiago.tarefas.ui.AppViewModelProvider
 import com.tiago.tarefas.ui.components.NewTaskTextField
 import com.tiago.tarefas.ui.components.TaskComponent
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
 fun TaskListScreen(
-    taskListViewmodel: TaskListViewmodel = viewModel(factory = AppViewModelProvider.Factory)
+    taskListViewmodel: TaskListViewmodel = hiltViewModel()
 ) {
     val taskListUiState by taskListViewmodel.uiState.collectAsStateWithLifecycle()
 

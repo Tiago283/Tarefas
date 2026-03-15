@@ -6,14 +6,19 @@ import androidx.lifecycle.viewModelScope
 import com.tiago.tarefas.data.entity.TaskEntity
 import com.tiago.tarefas.data.local.TaskRepository
 import com.tiago.tarefas.models.TaskModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TaskListViewmodel(private val repository: TaskRepository) : ViewModel() {
+@HiltViewModel
+class TaskListViewmodel @Inject constructor(
+    private val repository: TaskRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(TaskListState())
     val uiState: StateFlow<TaskListState> = _uiState.asStateFlow()
 
