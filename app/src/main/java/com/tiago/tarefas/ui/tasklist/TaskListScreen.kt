@@ -44,6 +44,11 @@ fun TaskListScreen(
                 taskId
             )
         },
+        editTask = { taskId ->
+            taskListViewmodel.editTask(
+                taskId
+            )
+        },
         createTask = {
             taskListViewmodel.createTask()
         }
@@ -57,6 +62,7 @@ fun TaskListContent(
     modifier: Modifier = Modifier,
     onCheckTask: (taskId: Int, value: Boolean) -> Unit,
     deleteTask: (taskId: Int) -> Unit,
+    editTask: (taskId: Int) -> Unit,
     createTask: () -> Unit
 ) {
     Scaffold(
@@ -100,7 +106,8 @@ fun TaskListContent(
                             TaskComponent(
                                 task,
                                 onCheckTask,
-                                deleteTask
+                                deleteTask,
+                                editTask
                             )
                             HorizontalDivider()
                         }
@@ -126,6 +133,7 @@ private fun TaskListPreview() {
             ),
             onCheckTask = { _, _ -> },
             deleteTask = {},
+            editTask = {},
             createTask = {}
         )
     }

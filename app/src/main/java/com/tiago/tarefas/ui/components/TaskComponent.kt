@@ -31,6 +31,7 @@ fun TaskComponent(
     task: TaskModel,
     onCheckTask: (taskId: Int, value: Boolean) -> Unit,
     deleteTask: (taskId: Int) -> Unit,
+    editTask: (taskId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var scrollState by remember { mutableStateOf(ScrollState(1)) }
@@ -77,7 +78,7 @@ fun TaskComponent(
             horizontalArrangement = Arrangement.End
         ) {
             IconButton(
-                onClick = {}
+                onClick = { editTask(task.id) }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_edit),
@@ -96,7 +97,7 @@ fun TaskComponent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun TaskComponentPreview() {
     TarefasTheme {
@@ -107,7 +108,8 @@ private fun TaskComponentPreview() {
                 task = "Example Task"
             ),
             onCheckTask = { _, _  -> },
-            deleteTask = {}
+            deleteTask = {},
+            editTask = {}
         )
     }
 }

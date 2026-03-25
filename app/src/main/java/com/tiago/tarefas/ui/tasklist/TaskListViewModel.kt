@@ -1,5 +1,6 @@
 package com.tiago.tarefas.ui.tasklist
 
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.clearText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -63,6 +64,21 @@ class TaskListViewmodel @Inject constructor(
             }
 
             _uiState.value.newTaskTextFieldState.clearText()
+        }
+    }
+
+    fun editTask(taskId: Int) {
+        viewModelScope.launch {
+            val task = _uiState.value.taskList
+                .first { it.id == taskId}
+
+            _uiState.update {
+                it.copy(
+                    newTaskTextFieldState = TextFieldState(task.task)
+                )
+            }
+
+            repository.deleteTask(task.toTaskEntity())
         }
     }
 
