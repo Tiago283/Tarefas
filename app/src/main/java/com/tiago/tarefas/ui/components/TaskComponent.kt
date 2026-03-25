@@ -70,15 +70,28 @@ fun TaskComponent(
                 maxLines = 1
             )
         }
-        IconButton(
-            onClick = { deleteTask(task.id) },
+        Row(
             modifier = Modifier
-                .padding(5.dp)
+                .padding(5.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
         ) {
-            Icon(
-                painter = painterResource(R.drawable.ic_delete),
-                contentDescription = null
-            )
+            IconButton(
+                onClick = {}
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_edit),
+                    contentDescription = null // TODO: Add contentDescription
+                )
+            }
+            IconButton(
+                onClick = { deleteTask(task.id) }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_delete),
+                    contentDescription = null // TODO: Add contentDescription
+                )
+            }
         }
     }
 }
