@@ -81,7 +81,7 @@ fun TaskComponent(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_edit),
-                    contentDescription = null // TODO: Add contentDescription
+                    contentDescription = null
                 )
             }
             IconButton(
@@ -89,7 +89,7 @@ fun TaskComponent(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_delete),
-                    contentDescription = null // TODO: Add contentDescription
+                    contentDescription = null
                 )
             }
         }
