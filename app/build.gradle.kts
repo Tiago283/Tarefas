@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 android {
@@ -16,6 +17,7 @@ android {
     defaultConfig {
         applicationId = "com.tiago.tarefas"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -44,8 +46,11 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
 
+    implementation(libs.kotlinx.serialization.core)
+
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
 
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
@@ -54,6 +59,9 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
+
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.navigation3.runtime)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.runtime)
