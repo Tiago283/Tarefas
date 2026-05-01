@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Tarefas</string>
     <string name="add_task">Adicionar Tarefa</string>
+    <string name="notes">Notas</string>
 </resources>

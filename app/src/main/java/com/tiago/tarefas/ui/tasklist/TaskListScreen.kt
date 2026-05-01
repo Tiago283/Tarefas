@@ -3,26 +3,20 @@ package com.tiago.tarefas.ui.tasklist
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tiago.tarefas.R
 import com.tiago.tarefas.models.TaskModel
 import com.tiago.tarefas.ui.components.NewTaskTextField
 import com.tiago.tarefas.ui.components.TaskComponent
@@ -65,52 +59,40 @@ fun TaskListContent(
     editTask: (taskId: Int) -> Unit,
     createTask: () -> Unit
 ) {
-    Scaffold(
+    Column(
         modifier = modifier
-            .fillMaxSize()
-            .imePadding(),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(stringResource(R.string.app_name)) }
-            )
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            NewTaskTextField(
-                state = uiState.newTaskTextFieldState,
-                createTask = createTask
-            )
-            when {
-                uiState.isLoading -> {
-                    Column(
-                        modifier = Modifier
-                            .weight(1f),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        CircularProgressIndicator()
-                    }
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        NewTaskTextField(
+            state = uiState.newTaskTextFieldState,
+            createTask = createTask
+        )
+        when {
+            uiState.isLoading -> {
+                Column(
+                    modifier = Modifier
+                        .weight(1f),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
                 }
-                else -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp)
-                    ) {
-                        items(uiState.taskList) { task ->
-                            TaskComponent(
-                                task,
-                                onCheckTask,
-                                deleteTask,
-                                editTask
-                            )
-                            HorizontalDivider()
-                        }
+            }
+            else -> {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp)
+                ) {
+                    items(uiState.taskList) { task ->
+                        TaskComponent(
+                            task,
+                            onCheckTask,
+                            deleteTask,
+                            editTask
+                        )
+                        HorizontalDivider()
                     }
                 }
             }
