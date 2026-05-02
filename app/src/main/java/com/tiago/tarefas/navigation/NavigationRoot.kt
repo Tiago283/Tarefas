@@ -12,6 +12,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.tiago.tarefas.ui.notelist.NoteListScreen
 import com.tiago.tarefas.ui.tasklist.TaskListScreen
 import kotlin.collections.listOf
 
@@ -42,7 +43,7 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             ),
             entryProvider = entryProvider {
                 entry<Route.TaskList> { TaskListScreen() }
-                entry<Route.NoteList> { Column { } }
+                entry<Route.NoteList> { NoteListScreen() }
                 entry<Route.NoteDetail> { }
             }
         )
