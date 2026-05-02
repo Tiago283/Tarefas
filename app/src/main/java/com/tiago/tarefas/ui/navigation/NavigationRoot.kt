@@ -11,11 +11,11 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.tiago.tarefas.R
 import com.tiago.tarefas.ui.components.TarefasAppBar
 import com.tiago.tarefas.ui.navigation.components.AppNavigationBar
 import com.tiago.tarefas.ui.features.notelist.NoteListScreen
 import com.tiago.tarefas.ui.features.tasklist.TaskListScreen
+import com.tiago.tarefas.ui.navigation.components.TOP_LEVEL_DESTINATIONS
 import kotlin.collections.listOf
 
 @Composable
@@ -29,7 +29,7 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             .imePadding(),
         topBar = {
             TarefasAppBar(
-                title = if (currentRoute == Route.TaskList) R.string.app_name else R.string.notes
+                title = TOP_LEVEL_DESTINATIONS[currentRoute]?.title
             )
         },
         bottomBar = {

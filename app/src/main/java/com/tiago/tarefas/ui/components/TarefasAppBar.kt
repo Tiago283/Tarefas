@@ -6,12 +6,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.tiago.tarefas.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TarefasAppBar(title: Int, modifier: Modifier = Modifier) {
+fun TarefasAppBar(title: Int?, modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
-        title = { Text(stringResource(title)) },
+        title = { Text(stringResource(title ?: R.string.app_name)) },
         modifier = modifier
     )
 }
