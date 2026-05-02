@@ -24,28 +24,13 @@ import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
 fun TaskListScreen(
-    taskListViewmodel: TaskListViewmodel = hiltViewModel()
+    taskListViewModel: TaskListViewModel = hiltViewModel()
 ) {
-    val taskListUiState by taskListViewmodel.uiState.collectAsStateWithLifecycle()
+    val taskListUiState by taskListViewModel.uiState.collectAsStateWithLifecycle()
 
     TaskListContent(
         uiState = taskListUiState,
-        onCheckTask = { taskId, value ->
-            taskListViewmodel.checkTask(taskId, value)
-        },
-        deleteTask = { taskId ->
-            taskListViewmodel.deleteTask(
-                taskId
-            )
-        },
-        editTask = { taskId ->
-            taskListViewmodel.editTask(
-                taskId
-            )
-        },
-        createTask = {
-            taskListViewmodel.createTask()
-        }
+        onAction = taskListViewModel::onAction
     )
 }
 
@@ -54,10 +39,7 @@ fun TaskListScreen(
 fun TaskListContent(
     uiState: TaskListState,
     modifier: Modifier = Modifier,
-    onCheckTask: (taskId: Int, value: Boolean) -> Unit,
-    deleteTask: (taskId: Int) -> Unit,
-    editTask: (taskId: Int) -> Unit,
-    createTask: () -> Unit
+    onAction: (TaskAction) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -66,7 +48,7 @@ fun TaskListContent(
     ) {
         NewTaskTextField(
             state = uiState.newTaskTextFieldState,
-            createTask = createTask
+            createTask = { onAction(TaskAction.CreateTask) }
         )
         when {
             uiState.isLoading -> {
@@ -87,10 +69,8 @@ fun TaskListContent(
                 ) {
                     items(uiState.taskList) { task ->
                         TaskComponent(
-                            task,
-                            onCheckTask,
-                            deleteTask,
-                            editTask
+                            task = task,
+                            onAction = onAction
                         )
                         HorizontalDivider()
                     }
@@ -113,10 +93,7 @@ private fun TaskListPreview() {
                 ),
                 isLoading = false
             ),
-            onCheckTask = { _, _ -> },
-            deleteTask = {},
-            editTask = {},
-            createTask = {}
+            onAction = {}
         )
     }
 }

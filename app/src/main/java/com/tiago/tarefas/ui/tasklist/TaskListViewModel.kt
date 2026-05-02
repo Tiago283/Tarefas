@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskListViewmodel @Inject constructor(
+class TaskListViewModel @Inject constructor(
     private val repository: TaskRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(TaskListState())
@@ -25,6 +25,15 @@ class TaskListViewmodel @Inject constructor(
 
     init {
         loadTasks()
+    }
+
+    fun onAction(action: TaskAction) {
+        when(action) {
+            TaskAction.CreateTask -> createTask()
+            is TaskAction.EditTask -> editTask(action.taskId)
+            is TaskAction.OnCheckTask -> checkTask(action.taskId, action.value)
+            is TaskAction.DeleteTask -> deleteTask(action.taskId)
+        }
     }
 
     private fun loadTasks() {
@@ -43,7 +52,7 @@ class TaskListViewmodel @Inject constructor(
         }
     }
 
-    fun checkTask(taskId: Int, value: Boolean) {
+    private fun checkTask(taskId: Int, value: Boolean) {
         viewModelScope.launch {
             val task = _uiState.value.taskList
                 .first { it.id == taskId }
@@ -53,7 +62,7 @@ class TaskListViewmodel @Inject constructor(
         }
     }
 
-    fun createTask() {
+    private fun createTask() {
         viewModelScope.launch {
             val text = _uiState.value.newTaskTextFieldState.text.toString()
 
@@ -67,7 +76,7 @@ class TaskListViewmodel @Inject constructor(
         }
     }
 
-    fun editTask(taskId: Int) {
+    private fun editTask(taskId: Int) {
         viewModelScope.launch {
             val task = _uiState.value.taskList
                 .first { it.id == taskId}
@@ -82,7 +91,7 @@ class TaskListViewmodel @Inject constructor(
         }
     }
 
-    fun deleteTask(taskId: Int) {
+    private fun deleteTask(taskId: Int) {
         viewModelScope.launch {
             val task = _uiState.value.taskList
                 .first { it.id == taskId }

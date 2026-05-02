@@ -24,14 +24,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tiago.tarefas.R
 import com.tiago.tarefas.models.TaskModel
+import com.tiago.tarefas.ui.tasklist.TaskAction
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable
 fun TaskComponent(
     task: TaskModel,
-    onCheckTask: (taskId: Int, value: Boolean) -> Unit,
-    deleteTask: (taskId: Int) -> Unit,
-    editTask: (taskId: Int) -> Unit,
+    onAction: (TaskAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var scrollState by remember { mutableStateOf(ScrollState(1)) }
@@ -45,7 +44,7 @@ fun TaskComponent(
         Checkbox(
             checked = task.isChecked,
             onCheckedChange = { value ->
-                onCheckTask(task.id, value)
+                onAction(TaskAction.OnCheckTask(task.id, value))
             },
             modifier = Modifier
                 .padding(5.dp)
@@ -78,7 +77,7 @@ fun TaskComponent(
             horizontalArrangement = Arrangement.End
         ) {
             IconButton(
-                onClick = { editTask(task.id) }
+                onClick = { onAction(TaskAction.EditTask(task.id)) }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_edit),
@@ -86,7 +85,7 @@ fun TaskComponent(
                 )
             }
             IconButton(
-                onClick = { deleteTask(task.id) }
+                onClick = { onAction(TaskAction.DeleteTask(task.id)) }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_delete),
@@ -107,9 +106,7 @@ private fun TaskComponentPreview() {
                 isChecked = false,
                 task = "Example Task"
             ),
-            onCheckTask = { _, _  -> },
-            deleteTask = {},
-            editTask = {}
+            onAction = {}
         )
     }
 }
