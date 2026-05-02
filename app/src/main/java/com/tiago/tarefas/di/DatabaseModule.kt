@@ -1,7 +1,8 @@
-package com.tiago.tarefas.data
+package com.tiago.tarefas.di
 
 import android.content.Context
 import androidx.room.Room
+import com.tiago.tarefas.data.local.AppDatabase
 import com.tiago.tarefas.data.local.TaskDao
 import dagger.Module
 import dagger.Provides

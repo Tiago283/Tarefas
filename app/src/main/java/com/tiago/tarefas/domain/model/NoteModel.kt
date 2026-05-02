@@ -1,4 +1,4 @@
-package com.tiago.tarefas.models
+package com.tiago.tarefas.domain.model
 
 import kotlinx.serialization.Serializable
 

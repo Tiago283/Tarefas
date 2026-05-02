@@ -1,4 +1,4 @@
-package com.tiago.tarefas.data.entity
+package com.tiago.tarefas.data.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,6 +1,7 @@
-package com.tiago.tarefas.data.local
+package com.tiago.tarefas.data.repository
 
-import com.tiago.tarefas.data.entity.TaskEntity
+import com.tiago.tarefas.data.local.TaskDao
+import com.tiago.tarefas.data.local.TaskEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

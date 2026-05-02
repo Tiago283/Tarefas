@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tiago.tarefas.models.TaskModel
+import com.tiago.tarefas.domain.model.TaskModel
 import com.tiago.tarefas.ui.components.NewTaskTextField
 import com.tiago.tarefas.ui.components.TaskComponent
 import com.tiago.tarefas.ui.theme.TarefasTheme

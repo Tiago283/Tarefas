@@ -1,7 +1,7 @@
 package com.tiago.tarefas.navigation
 
 import androidx.navigation3.runtime.NavKey
-import com.tiago.tarefas.models.NoteModel
+import com.tiago.tarefas.domain.model.NoteModel
 import kotlinx.serialization.Serializable
 
 interface Route : NavKey {

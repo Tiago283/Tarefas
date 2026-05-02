@@ -4,9 +4,9 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.clearText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tiago.tarefas.data.entity.TaskEntity
-import com.tiago.tarefas.data.local.TaskRepository
-import com.tiago.tarefas.models.TaskModel
+import com.tiago.tarefas.data.local.TaskEntity
+import com.tiago.tarefas.data.repository.TaskRepository
+import com.tiago.tarefas.domain.model.TaskModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

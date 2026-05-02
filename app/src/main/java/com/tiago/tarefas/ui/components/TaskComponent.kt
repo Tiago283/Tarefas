@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tiago.tarefas.R
-import com.tiago.tarefas.models.TaskModel
+import com.tiago.tarefas.domain.model.TaskModel
 import com.tiago.tarefas.ui.tasklist.TaskAction
 import com.tiago.tarefas.ui.theme.TarefasTheme
 

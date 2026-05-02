@@ -1,4 +1,4 @@
-package com.tiago.tarefas.models
+package com.tiago.tarefas.domain.model
 
 data class TaskModel(
     val id: Int,
