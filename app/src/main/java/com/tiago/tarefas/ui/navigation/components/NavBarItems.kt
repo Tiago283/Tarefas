@@ -1,6 +1,7 @@
-package com.tiago.tarefas.navigation
+package com.tiago.tarefas.ui.navigation.components
 
 import com.tiago.tarefas.R
+import com.tiago.tarefas.ui.navigation.Route
 
 data class NavBarItem(
     val icon: Int,

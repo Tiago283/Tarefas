@@ -1,4 +1,4 @@
-package com.tiago.tarefas.navigation
+package com.tiago.tarefas.ui.navigation.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar

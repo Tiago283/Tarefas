@@ -1,4 +1,4 @@
-package com.tiago.tarefas.navigation
+package com.tiago.tarefas.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
@@ -11,8 +11,11 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.tiago.tarefas.ui.notelist.NoteListScreen
-import com.tiago.tarefas.ui.tasklist.TaskListScreen
+import com.tiago.tarefas.R
+import com.tiago.tarefas.ui.components.TarefasAppBar
+import com.tiago.tarefas.ui.navigation.components.AppNavigationBar
+import com.tiago.tarefas.ui.features.notelist.NoteListScreen
+import com.tiago.tarefas.ui.features.tasklist.TaskListScreen
 import kotlin.collections.listOf
 
 @Composable
@@ -24,6 +27,11 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxSize()
             .imePadding(),
+        topBar = {
+            TarefasAppBar(
+                title = if (currentRoute == Route.TaskList) R.string.app_name else R.string.notes
+            )
+        },
         bottomBar = {
             AppNavigationBar(
                 selectedKey = currentRoute,

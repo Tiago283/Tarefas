@@ -1,4 +1,4 @@
-package com.tiago.tarefas.navigation
+package com.tiago.tarefas.ui.navigation
 
 import androidx.navigation3.runtime.NavKey
 import com.tiago.tarefas.domain.model.NoteModel

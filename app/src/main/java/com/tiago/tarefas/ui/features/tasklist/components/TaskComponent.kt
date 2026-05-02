@@ -1,4 +1,4 @@
-package com.tiago.tarefas.ui.components
+package com.tiago.tarefas.ui.features.tasklist.components
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.horizontalScroll
@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tiago.tarefas.R
 import com.tiago.tarefas.domain.model.TaskModel
-import com.tiago.tarefas.ui.tasklist.TaskAction
+import com.tiago.tarefas.ui.features.tasklist.TaskAction
 import com.tiago.tarefas.ui.theme.TarefasTheme
 
 @Composable

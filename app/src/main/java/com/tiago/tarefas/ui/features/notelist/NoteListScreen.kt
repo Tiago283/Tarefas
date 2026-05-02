@@ -1,4 +1,4 @@
-package com.tiago.tarefas.ui.notelist
+package com.tiago.tarefas.ui.features.notelist
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

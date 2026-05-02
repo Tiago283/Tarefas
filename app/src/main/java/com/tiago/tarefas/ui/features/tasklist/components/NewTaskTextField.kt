@@ -1,4 +1,4 @@
-package com.tiago.tarefas.ui.components
+package com.tiago.tarefas.ui.features.tasklist.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package com.tiago.tarefas.ui.tasklist
+package com.tiago.tarefas.ui.features.tasklist
 
 import androidx.compose.foundation.text.input.TextFieldState
 import com.tiago.tarefas.domain.model.TaskModel

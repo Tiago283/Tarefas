@@ -1,4 +1,4 @@
-package com.tiago.tarefas.ui.tasklist
+package com.tiago.tarefas.ui.features.tasklist
 
 sealed interface TaskAction {
     data object CreateTask : TaskAction
