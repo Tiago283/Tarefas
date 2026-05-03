@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Tarefas</string>
-    <string name="add_task">Adicionar Tarefa</string>
+    <string name="add_task">Adicionar tarefa</string>
     <string name="notes">Notas</string>
+    <string name="tasks">Tarefas</string>
+    <string name="add_note">Adicionar nota</string>
 </resources>

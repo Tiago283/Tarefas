@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tiago.tarefas"
+    namespace = "com.tiago.annoter"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.tiago.tarefas"
+        applicationId = "com.tiago.annoter"
         minSdk = 24
         //noinspection OldTargetApi
         targetSdk = 36

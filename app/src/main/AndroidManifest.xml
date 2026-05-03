@@ -10,12 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tarefas"
-        android:name=".TarefasApplication">
+        android:theme="@style/Theme.Annoter"
+        android:name=".AnnoterApplication">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Tarefas">
+            android:theme="@style/Theme.Annoter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

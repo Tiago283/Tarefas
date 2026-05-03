@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Tarefas"
+rootProject.name = "Annoter"
 include(":app")
