@@ -15,25 +15,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.tiago.annoter.domain.model.NoteModel
 import com.tiago.annoter.ui.features.notelist.components.NoteCard
 import com.tiago.annoter.ui.theme.AnnoterTheme
 
 @Composable
 fun NoteListScreen(
-    noteListViewModel: NoteListViewModel = hiltViewModel()
+    noteListViewModel: NoteListViewModel = hiltViewModel(),
+    backStack: NavBackStack<NavKey>
 ) {
     val noteListUiState by noteListViewModel.uiState.collectAsStateWithLifecycle()
 
     NoteListContent(
-        uiState = noteListUiState
+        uiState = noteListUiState,
+        backStack = backStack,
+        onAction = noteListViewModel::onAction
     )
 }
 
 @Composable
 fun NoteListContent(
     uiState: NoteListState,
-    modifier: Modifier = Modifier
+    backStack: NavBackStack<NavKey>,
+    modifier: Modifier = Modifier,
+    onAction: (NoteAction) -> Unit
 ) {
     when {
         uiState.isLoading -> {
@@ -55,7 +62,14 @@ fun NoteListContent(
                 items(uiState.noteList) { note ->
                     NoteCard(
                         note = note,
-                        onClick = {}
+                        onClick = {
+                            onAction(
+                                NoteAction.OnNoteClicked(
+                                    noteId = note.id,
+                                    backStack = backStack
+                                )
+                            )
+                        }
                     )
                 }
             }
@@ -75,7 +89,9 @@ private fun NoteListContentPreview() {
                     NoteModel(3, "Title", "Note"),
                 ),
                 isLoading = false
-            )
+            ),
+            backStack = NavBackStack(),
+            onAction = {}
         )
     }
 }

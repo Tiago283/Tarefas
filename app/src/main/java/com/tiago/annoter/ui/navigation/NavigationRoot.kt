@@ -17,7 +17,9 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.tiago.annoter.R
+import com.tiago.annoter.domain.model.NoteModel
 import com.tiago.annoter.ui.components.TarefasAppBar
+import com.tiago.annoter.ui.features.notedetail.NoteDetailScreen
 import com.tiago.annoter.ui.navigation.components.AnnoterNavigationBar
 import com.tiago.annoter.ui.features.notelist.NoteListScreen
 import com.tiago.annoter.ui.features.tasklist.TaskListScreen
@@ -26,7 +28,7 @@ import kotlin.collections.listOf
 
 @Composable
 fun NavigationRoot(modifier: Modifier = Modifier) {
-    val backStack = rememberNavBackStack(Route.TaskList)
+    val backStack = rememberNavBackStack(Route.NoteList)
     val currentRoute = backStack.last()
 
     Scaffold(
@@ -49,7 +51,9 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
                 visible = currentRoute == Route.NoteList
             ) {
                 FloatingActionButton(
-                    onClick = {}
+                    onClick = {
+                        backStack.add(Route.NoteDetail(NoteModel(0, "", "")))
+                    }
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_add),
@@ -70,8 +74,8 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             ),
             entryProvider = entryProvider {
                 entry<Route.TaskList> { TaskListScreen() }
-                entry<Route.NoteList> { NoteListScreen() }
-                entry<Route.NoteDetail> { }
+                entry<Route.NoteList> { NoteListScreen(backStack = backStack) }
+                entry<Route.NoteDetail> { NoteDetailScreen(it.note) }
             }
         )
     }

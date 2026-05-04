@@ -9,6 +9,6 @@ data class NavBarItem(
 )
 
 val TOP_LEVEL_DESTINATIONS = mapOf(
-    Route.TaskList to NavBarItem(icon = R.drawable.ic_confirm, title = R.string.tasks),
-    Route.NoteList to NavBarItem(icon = R.drawable.ic_note, title = R.string.notes)
+    Route.NoteList to NavBarItem(icon = R.drawable.ic_note, title = R.string.notes),
+    Route.TaskList to NavBarItem(icon = R.drawable.ic_confirm, title = R.string.tasks)
 )
