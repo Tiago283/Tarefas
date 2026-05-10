@@ -29,8 +29,8 @@ class NoteListViewModel @Inject constructor(
 
     fun onAction(action: NoteAction) {
         when (action) {
-            NoteAction.OnFabClicked -> {}
             is NoteAction.OnNoteClicked -> goToNote(action.noteId, action.backStack)
+            else -> {}
         }
     }
 

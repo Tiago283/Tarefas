@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +29,7 @@ class TaskListViewModel @Inject constructor(
 
     fun onAction(action: TaskAction) {
         when(action) {
-            TaskAction.CreateTask -> createTask()
+            is TaskAction.CreateTask -> createTask()
             is TaskAction.EditTask -> editTask(action.taskId)
             is TaskAction.OnCheckTask -> checkTask(action.taskId, action.value)
             is TaskAction.DeleteTask -> deleteTask(action.taskId)
@@ -38,12 +39,12 @@ class TaskListViewModel @Inject constructor(
     private fun loadTasks() {
         viewModelScope.launch {
             repository.getAll()
-                .collect { list ->
+                .collectLatest { list ->
                     _uiState.update {
                         it.copy(
-                            taskList = list.map { task ->
-                                task.toTaskModel()
-                            },
+                            taskList = list
+                                .map { task -> task.toTaskModel() }
+                                .sortedBy { task -> task.isChecked },
                             isLoading = false
                         )
                     }

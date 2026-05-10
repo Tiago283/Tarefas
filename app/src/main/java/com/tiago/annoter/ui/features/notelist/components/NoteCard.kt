@@ -24,7 +24,7 @@ fun NoteCard(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(5.dp)
     ) {
         Column(
             modifier = Modifier

@@ -4,27 +4,22 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.tiago.annoter.R
 import com.tiago.annoter.domain.model.NoteModel
 import com.tiago.annoter.ui.components.TarefasAppBar
 import com.tiago.annoter.ui.features.notedetail.NoteDetailScreen
-import com.tiago.annoter.ui.navigation.components.AnnoterNavigationBar
 import com.tiago.annoter.ui.features.notelist.NoteListScreen
+import com.tiago.annoter.ui.features.notelist.components.CreateNoteFab
 import com.tiago.annoter.ui.features.tasklist.TaskListScreen
+import com.tiago.annoter.ui.navigation.components.AnnoterNavigationBar
 import com.tiago.annoter.ui.navigation.components.TOP_LEVEL_DESTINATIONS
-import kotlin.collections.listOf
 
 @Composable
 fun NavigationRoot(modifier: Modifier = Modifier) {
@@ -50,15 +45,8 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             AnimatedVisibility(
                 visible = currentRoute == Route.NoteList
             ) {
-                FloatingActionButton(
-                    onClick = {
-                        backStack.add(Route.NoteDetail(NoteModel(0, "", "")))
-                    }
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_add),
-                        contentDescription = stringResource(R.string.add_task)
-                    )
+                CreateNoteFab {
+                    backStack.add(Route.NoteDetail(NoteModel(0, "", "")))
                 }
             }
         }
@@ -75,7 +63,7 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             entryProvider = entryProvider {
                 entry<Route.TaskList> { TaskListScreen() }
                 entry<Route.NoteList> { NoteListScreen(backStack = backStack) }
-                entry<Route.NoteDetail> { NoteDetailScreen(it.note) }
+                entry<Route.NoteDetail> { NoteDetailScreen(note = it.note, backStack = backStack) }
             }
         )
     }
