@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.tiago.annoter.domain.model.NoteModel
 import com.tiago.annoter.ui.theme.AnnoterTheme
 
@@ -34,6 +35,7 @@ fun NoteCard(
                 Text(
                     text = note.title,
                     fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp
                 )
             }
             if (note.note.isNotBlank()) {

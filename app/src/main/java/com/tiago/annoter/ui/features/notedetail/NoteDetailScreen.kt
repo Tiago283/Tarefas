@@ -1,15 +1,17 @@
 package com.tiago.annoter.ui.features.notedetail
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,27 +46,28 @@ fun NoteDetailContent(
     modifier: Modifier = Modifier,
     onAction: (NoteDetailAction) -> Unit
 ) {
-    Scaffold(
+    Column(
         modifier = modifier
             .fillMaxSize(),
-        topBar = {
-            NoteDetailAppBar(
-                titleState = uiState.titleTextFieldState,
-                onAction = onAction
-            )
-        }
-    ) { innerPadding ->
+    ) {
+        NoteDetailAppBar(
+            titleState = uiState.titleTextFieldState,
+            onAction = onAction
+        )
         OutlinedTextField(
             state = uiState.noteTextFieldState,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
                 .padding(10.dp),
             lineLimits = TextFieldLineLimits.MultiLine(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 capitalization = KeyboardCapitalization.Sentences
             ),
-            placeholder = { Text(stringResource(R.string.note)) }
+            placeholder = { Text(stringResource(R.string.note)) },
+            colors = TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            )
         )
     }
 }
