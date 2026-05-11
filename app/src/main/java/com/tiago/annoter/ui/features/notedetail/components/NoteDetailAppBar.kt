@@ -65,12 +65,12 @@ fun NoteDetailAppBar(
                 modifier = Modifier
                     .fillMaxWidth(),
                 lineLimits = TextFieldLineLimits.SingleLine,
-                textStyle = TextStyle(fontSize = 25.sp, fontWeight = FontWeight.Bold),
+                textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     capitalization = KeyboardCapitalization.Sentences
                 ),
                 placeholder = {
-                    Text(stringResource(R.string.tilte), fontSize = 25.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.tilte), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 },
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,

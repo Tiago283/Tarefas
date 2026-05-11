@@ -35,7 +35,7 @@ fun NoteCard(
                 Text(
                     text = note.title,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
+                    fontSize = 20.sp
                 )
             }
             if (note.note.isNotBlank()) {
