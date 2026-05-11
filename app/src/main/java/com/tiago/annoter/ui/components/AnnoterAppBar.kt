@@ -10,7 +10,7 @@ import com.tiago.annoter.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TarefasAppBar(title: Int?, modifier: Modifier = Modifier) {
+fun AnnoterAppBar(title: Int?, modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
         title = { Text(stringResource(title ?: R.string.app_name)) },
         modifier = modifier

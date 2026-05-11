@@ -1,18 +1,17 @@
 package com.tiago.annoter.ui.features.notedetail
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -21,6 +20,7 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.tiago.annoter.R
 import com.tiago.annoter.domain.model.NoteModel
+import com.tiago.annoter.ui.features.notedetail.components.NoteDetailAppBar
 import com.tiago.annoter.ui.theme.AnnoterTheme
 
 @Composable
@@ -44,46 +44,27 @@ fun NoteDetailContent(
     modifier: Modifier = Modifier,
     onAction: (NoteDetailAction) -> Unit
 ) {
-    Column(
+    Scaffold(
         modifier = modifier
-            .fillMaxSize()
-            .padding(10.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            IconButton(
-                onClick = { onAction(NoteDetailAction.GoBack) }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_arrow_back),
-                    contentDescription = null
-                )
-            }
-            OutlinedTextField(
-                state = uiState.titleTextFieldState,
-                modifier = Modifier
-                    .padding(bottom = 10.dp)
-                    .fillMaxWidth(0.9f),
-                lineLimits = TextFieldLineLimits.SingleLine
+            .fillMaxSize(),
+        topBar = {
+            NoteDetailAppBar(
+                titleState = uiState.titleTextFieldState,
+                onAction = onAction
             )
-            IconButton(
-                onClick = { onAction(NoteDetailAction.Delete) },
-                modifier = Modifier
-                    .padding(bottom = 10.dp)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_delete),
-                    contentDescription = null
-                )
-            }
         }
+    ) { innerPadding ->
         OutlinedTextField(
             state = uiState.noteTextFieldState,
             modifier = Modifier
-                .fillMaxSize(),
-            lineLimits = TextFieldLineLimits.MultiLine()
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(10.dp),
+            lineLimits = TextFieldLineLimits.MultiLine(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                capitalization = KeyboardCapitalization.Sentences
+            ),
+            placeholder = { Text(stringResource(R.string.note)) }
         )
     }
 }

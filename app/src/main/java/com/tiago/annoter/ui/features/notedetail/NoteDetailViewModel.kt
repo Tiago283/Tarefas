@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.tiago.annoter.data.local.NoteEntity
+import com.tiago.annoter.data.mapper.toNoteEntity
+import com.tiago.annoter.data.mapper.toNoteModel
 import com.tiago.annoter.data.repository.NoteRepository
-import com.tiago.annoter.ui.features.notelist.toNoteEntity
-import com.tiago.annoter.ui.features.notelist.toNoteModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

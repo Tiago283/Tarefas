@@ -5,8 +5,9 @@ import androidx.compose.foundation.text.input.clearText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tiago.annoter.data.local.TaskEntity
+import com.tiago.annoter.data.mapper.toTaskEntity
+import com.tiago.annoter.data.mapper.toTaskModel
 import com.tiago.annoter.data.repository.TaskRepository
-import com.tiago.annoter.domain.model.TaskModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -100,15 +101,3 @@ class TaskListViewModel @Inject constructor(
         }
     }
 }
-
-fun TaskModel.toTaskEntity() : TaskEntity = TaskEntity(
-    id = id,
-    isChecked = isChecked,
-    task = task
-)
-
-fun TaskEntity.toTaskModel() : TaskModel = TaskModel(
-    id = id,
-    isChecked = isChecked,
-    task = task
-)

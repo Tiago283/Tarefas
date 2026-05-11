@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import com.tiago.annoter.data.local.NoteEntity
+import com.tiago.annoter.data.mapper.toNoteModel
 import com.tiago.annoter.data.repository.NoteRepository
-import com.tiago.annoter.domain.model.NoteModel
 import com.tiago.annoter.ui.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -60,15 +59,3 @@ class NoteListViewModel @Inject constructor(
         )
     }
 }
-
-fun NoteModel.toNoteEntity() : NoteEntity = NoteEntity(
-    id = id,
-    title = title,
-    note = note
-)
-
-fun NoteEntity.toNoteModel() : NoteModel = NoteModel(
-    id = id,
-    title = title,
-    note = note
-)

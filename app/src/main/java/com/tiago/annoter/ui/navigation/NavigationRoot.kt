@@ -13,7 +13,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.tiago.annoter.domain.model.NoteModel
-import com.tiago.annoter.ui.components.TarefasAppBar
+import com.tiago.annoter.ui.components.AnnoterAppBar
 import com.tiago.annoter.ui.features.notedetail.NoteDetailScreen
 import com.tiago.annoter.ui.features.notelist.NoteListScreen
 import com.tiago.annoter.ui.features.notelist.components.CreateNoteFab
@@ -31,15 +31,23 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .imePadding(),
         topBar = {
-            TarefasAppBar(
-                title = TOP_LEVEL_DESTINATIONS[currentRoute]?.title
-            )
+            AnimatedVisibility(
+                visible = currentRoute in TOP_LEVEL_DESTINATIONS
+            ) {
+                AnnoterAppBar(
+                    title = TOP_LEVEL_DESTINATIONS[currentRoute]?.title
+                )
+            }
         },
         bottomBar = {
-            AnnoterNavigationBar(
-                selectedKey = currentRoute,
-                onSelectKey = { backStack.add(it) }
-            )
+            AnimatedVisibility(
+                visible = currentRoute in TOP_LEVEL_DESTINATIONS
+            ) {
+                AnnoterNavigationBar(
+                    selectedKey = currentRoute,
+                    onSelectKey = { if (currentRoute != it) backStack.add(it) }
+                )
+            }
         },
         floatingActionButton = {
             AnimatedVisibility(
