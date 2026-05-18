@@ -4,10 +4,9 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.clearText
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tiago.annoter.data.local.TaskEntity
-import com.tiago.annoter.data.mapper.toTaskEntity
 import com.tiago.annoter.data.mapper.toTaskModel
 import com.tiago.annoter.data.repository.TaskRepository
+import com.tiago.annoter.domain.model.TaskModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -59,7 +58,7 @@ class TaskListViewModel @Inject constructor(
                 .first { it.id == taskId }
                 .copy(isChecked = value)
 
-            repository.updateTask(task.toTaskEntity())
+            repository.updateTask(task)
         }
     }
 
@@ -69,7 +68,7 @@ class TaskListViewModel @Inject constructor(
 
             if (text.isNotBlank()) {
                 repository.insertTask(
-                    TaskEntity(0, false, text)
+                    TaskModel(0, false, text)
                 )
             }
 
@@ -88,7 +87,7 @@ class TaskListViewModel @Inject constructor(
                 )
             }
 
-            repository.deleteTask(task.toTaskEntity())
+            repository.deleteTask(task)
         }
     }
 
@@ -97,7 +96,7 @@ class TaskListViewModel @Inject constructor(
             val task = _uiState.value.taskList
                 .first { it.id == taskId }
 
-            repository.deleteTask(task.toTaskEntity())
+            repository.deleteTask(task)
         }
     }
 }

@@ -2,11 +2,8 @@ package com.tiago.annoter.ui.features.notelist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation3.runtime.NavBackStack
-import androidx.navigation3.runtime.NavKey
 import com.tiago.annoter.data.mapper.toNoteModel
 import com.tiago.annoter.data.repository.NoteRepository
-import com.tiago.annoter.ui.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,13 +23,6 @@ class NoteListViewModel @Inject constructor(
         loadNotes()
     }
 
-    fun onAction(action: NoteAction) {
-        when (action) {
-            is NoteAction.OnNoteClicked -> goToNote(action.noteId, action.backStack)
-            else -> {}
-        }
-    }
-
     private fun loadNotes() {
         viewModelScope.launch {
             repository.getAll()
@@ -47,15 +37,5 @@ class NoteListViewModel @Inject constructor(
                     }
                 }
         }
-    }
-
-    private fun goToNote(noteId: Int, backStack: NavBackStack<NavKey>) {
-        backStack.add(
-            Route.NoteDetail(
-                _uiState.value.noteList.first {
-                    it.id == noteId
-                }
-            )
-        )
     }
 }

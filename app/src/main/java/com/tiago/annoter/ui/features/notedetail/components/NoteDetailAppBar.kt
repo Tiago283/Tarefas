@@ -26,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.tiago.annoter.R
 import com.tiago.annoter.ui.features.notedetail.NoteDetailAction
 
@@ -33,6 +35,7 @@ import com.tiago.annoter.ui.features.notedetail.NoteDetailAction
 @Composable
 fun NoteDetailAppBar(
     titleState: TextFieldState,
+    backStack: NavBackStack<NavKey>,
     modifier: Modifier = Modifier,
     onAction: (NoteDetailAction) -> Unit
 ) {
@@ -50,6 +53,8 @@ fun NoteDetailAppBar(
                         lastClickTime = currentTime
 
                         onAction(NoteDetailAction.GoBack)
+
+                        backStack.removeLastOrNull()
                     }
                 }
             ) {
@@ -85,6 +90,8 @@ fun NoteDetailAppBar(
 
                     if (currentTime - lastClickTime >= 1000L) {
                         lastClickTime = currentTime
+
+                        backStack.removeLastOrNull()
 
                         onAction(NoteDetailAction.Delete)
                     }

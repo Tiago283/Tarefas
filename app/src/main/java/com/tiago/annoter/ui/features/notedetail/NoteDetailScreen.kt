@@ -9,6 +9,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,17 +33,22 @@ fun NoteDetailScreen(
     noteDetailViewModel: NoteDetailViewModel = hiltViewModel()
 ) {
     val noteDetailUiState by noteDetailViewModel.uiState.collectAsStateWithLifecycle()
-    noteDetailViewModel.loadNoteAndBackStack(noteId = note.id, backStack = backStack)
+
+    LaunchedEffect(note.id) {
+        noteDetailViewModel.loadNote(noteId = note.id)
+    }
 
     NoteDetailContent(
         uiState = noteDetailUiState,
-        onAction = noteDetailViewModel::onAction
+        onAction = noteDetailViewModel::onAction,
+        backStack = backStack
     )
 }
 
 @Composable
 fun NoteDetailContent(
     uiState: NoteDetailState,
+    backStack: NavBackStack<NavKey>,
     modifier: Modifier = Modifier,
     onAction: (NoteDetailAction) -> Unit
 ) {
@@ -52,7 +58,8 @@ fun NoteDetailContent(
     ) {
         NoteDetailAppBar(
             titleState = uiState.titleTextFieldState,
-            onAction = onAction
+            onAction = onAction,
+            backStack = backStack
         )
         OutlinedTextField(
             state = uiState.noteTextFieldState,
@@ -80,6 +87,7 @@ private fun NoteDetailContentPreview() {
             uiState = NoteDetailState(
                 NoteModel(0, "Title", "Note")
             ),
+            backStack = NavBackStack(),
             onAction = {}
         )
     }

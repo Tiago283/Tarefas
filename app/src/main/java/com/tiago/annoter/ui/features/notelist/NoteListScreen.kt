@@ -16,8 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation3.runtime.NavBackStack
-import androidx.navigation3.runtime.NavKey
 import com.tiago.annoter.domain.model.NoteModel
 import com.tiago.annoter.ui.features.notelist.components.NoteCard
 import com.tiago.annoter.ui.theme.AnnoterTheme
@@ -25,23 +23,21 @@ import com.tiago.annoter.ui.theme.AnnoterTheme
 @Composable
 fun NoteListScreen(
     noteListViewModel: NoteListViewModel = hiltViewModel(),
-    backStack: NavBackStack<NavKey>
+    onNoteClicked: (note: NoteModel) -> Unit
 ) {
     val noteListUiState by noteListViewModel.uiState.collectAsStateWithLifecycle()
 
     NoteListContent(
         uiState = noteListUiState,
-        backStack = backStack,
-        onAction = noteListViewModel::onAction
+        onNoteClicked = { note -> onNoteClicked(note) }
     )
 }
 
 @Composable
 fun NoteListContent(
     uiState: NoteListState,
-    backStack: NavBackStack<NavKey>,
     modifier: Modifier = Modifier,
-    onAction: (NoteAction) -> Unit
+    onNoteClicked: (note: NoteModel) -> Unit,
 ) {
     when {
         uiState.isLoading -> {
@@ -64,14 +60,7 @@ fun NoteListContent(
                 items(uiState.noteList) { note ->
                     NoteCard(
                         note = note,
-                        onClick = {
-                            onAction(
-                                NoteAction.OnNoteClicked(
-                                    noteId = note.id,
-                                    backStack = backStack
-                                )
-                            )
-                        }
+                        onClick = { onNoteClicked(note) }
                     )
                 }
             }
@@ -92,8 +81,7 @@ private fun NoteListContentPreview() {
                 ),
                 isLoading = false
             ),
-            backStack = NavBackStack(),
-            onAction = {}
+            onNoteClicked = {}
         )
     }
 }

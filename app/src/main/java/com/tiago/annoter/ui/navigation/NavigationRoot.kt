@@ -62,7 +62,7 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
         NavDisplay(
             backStack = backStack,
             onBack = { backStack.removeLastOrNull() },
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding),
             entryDecorators = listOf(
                 rememberSaveableStateHolderNavEntryDecorator(),
@@ -70,7 +70,13 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
             ),
             entryProvider = entryProvider {
                 entry<Route.TaskList> { TaskListScreen() }
-                entry<Route.NoteList> { NoteListScreen(backStack = backStack) }
+                entry<Route.NoteList> {
+                    NoteListScreen(
+                        onNoteClicked = {
+                            backStack.add(Route.NoteDetail(it))
+                        }
+                    )
+                }
                 entry<Route.NoteDetail> { NoteDetailScreen(note = it.note, backStack = backStack) }
             }
         )
